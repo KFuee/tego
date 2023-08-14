@@ -55,6 +55,7 @@
     "clsx": "^2.0.0",
     "discord.js": "^14.12.1",
     "next": "13.4.1",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.14.0",
