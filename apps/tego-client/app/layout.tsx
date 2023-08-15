@@ -1,6 +1,8 @@
 'use client';
 
 import './global.css';
+
+import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
 type RootLayoutProps = {
@@ -9,7 +11,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <>
+    <SessionProvider>
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
@@ -18,6 +20,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </ThemeProvider>
         </body>
       </html>
-    </>
+    </SessionProvider>
   );
 }
