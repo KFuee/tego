@@ -43,12 +43,8 @@ export default function GuildSwitcher({
     state.setSelectedGuild,
   ]);
 
-  if (isLoading) {
-    return <span>Loading guilds...</span>;
-  }
-
-  if (isError || !guilds?.length) {
-    return <span>Failed to load guilds.</span>;
+  if (isLoading || isError || !guilds?.length) {
+    return null;
   }
 
   return (
@@ -79,36 +75,33 @@ export default function GuildSwitcher({
           <CommandList>
             <CommandInput placeholder="Search guild..." />
             <CommandEmpty>No guild found.</CommandEmpty>
-            {guilds?.length &&
-              guilds.map((guild) => (
-                <CommandItem
-                  key={guild.id}
-                  onSelect={() => {
-                    setSelectedGuild(guild);
-                    setOpen(false);
-                  }}
-                  className="text-sm"
-                >
-                  <Avatar className="mr-2 h-5 w-5">
-                    <AvatarImage
-                      src={getGuildIconURL(guild.id, guild.icon)}
-                      alt={guild.name.slice(0, 2)}
-                    />
-                    <AvatarFallback>
-                      {guild.name.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  {trimString(guild.name, 20)}
-                  <CheckIcon
-                    className={cn(
-                      'ml-auto h-4 w-4',
-                      selectedGuild?.id === guild.id
-                        ? 'opacity-100'
-                        : 'opacity-0'
-                    )}
+            {guilds?.map((guild) => (
+              <CommandItem
+                key={guild.id}
+                onSelect={() => {
+                  setSelectedGuild(guild);
+                  setOpen(false);
+                }}
+                className="text-sm"
+              >
+                <Avatar className="mr-2 h-5 w-5">
+                  <AvatarImage
+                    src={getGuildIconURL(guild.id, guild.icon)}
+                    alt={guild.name.slice(0, 2)}
                   />
-                </CommandItem>
-              ))}
+                  <AvatarFallback>
+                    {guild.name.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                {trimString(guild.name, 20)}
+                <CheckIcon
+                  className={cn(
+                    'ml-auto h-4 w-4',
+                    selectedGuild?.id === guild.id ? 'opacity-100' : 'opacity-0'
+                  )}
+                />
+              </CommandItem>
+            ))}
           </CommandList>
         </Command>
       </PopoverContent>
