@@ -4,7 +4,7 @@ import Nav from '@/components/nav';
 import { Button } from '@/components/ui/button';
 import { signIn, useSession } from 'next-auth/react';
 import React from 'react';
-import Skeleton from './skeleton';
+import Skeleton from './components/skeleton';
 
 export default function Index() {
   const { data: session } = useSession();
